@@ -44,7 +44,7 @@ else:
 	screenControl.clearScreen()
 	screenControl.drawText("You are not", "authorised")
 	speech_out.tts(declinedText)
-	sys.exit()
+	shutdown.shutdown()
 
 #setup face inference
 class_names, device, model_trained = face_infer.loadAndSetup()
