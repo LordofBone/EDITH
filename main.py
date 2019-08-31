@@ -8,6 +8,7 @@ import news
 import wolfram_access
 import screen
 import snaps
+import wakeonlan
 from colors import *
 import shutdown
 import sys
@@ -74,6 +75,8 @@ photo = ['photo', 'picture', 'pic', 'take photo', 'take a photo', 'image', 'take
 menuOpts = ['edith', 'menu', 'select', 'options', 'do something', 'they there']
 #retrain
 retrainKeys = ['train', 'retrain', 'train faces', 'retrain faces', 'train net', 'retrain net']
+#wake on lan
+wolKeys = ['wake', 'wake up', 'switch on', 'computer on', 'wake computer', 'turn on computer']
 
 #function for taking photos
 def snapPhoto():
@@ -219,11 +222,44 @@ def queryWolframAlpha():
 	
 	time.sleep(5)
 	
+#wake on lan function 
+def runWakeOnLAN():
+	#draw instructions on screen
+	screenControl.clearScreen()	
+	screenControl.drawText("Computer", "name")
+	
+	while True:
+	
+		#instruct user
+		speech_out.tts("Please name computer to switch on.")
+		
+		#get the question from the speech to text engine
+		pcNameInput = speech_in.listen()
+		
+		if pcNameInput == "exit":
+			return
+		
+		#send the computer name off to the wol module
+		if wakeonlan.computerOn(pcNameInput) == False:
+			speech_out.tts("Computer not found, please try again")
+			continue
+		else:
+			break
+		
+	
+	#put the string through tts
+	speech_out.tts("Turning on" + pcNameInput)
+	
+	#and draw the answer on screen and keep it there for a bit
+	screenControl.drawText("Turning on:", pcNameInput)
+	
+	time.sleep(5)
+	
 #news function
 def showNews():
 	newsList = []
 	newsList = news.getNews()
-	
+	screenControl.clearScreen()
 	screenControl.drawText("The", "news")
 	
 	for i in newsList:
@@ -257,6 +293,9 @@ def menu():
 		return
 	if inputWords in retrainKeys:
 		reTrain()
+		return
+	if inputWords in wolKeys:
+		runWakeOnLAN()
 		return
 	if inputWords in rebootKeys:
 		screenControl.drawText("Rebooting", "")
