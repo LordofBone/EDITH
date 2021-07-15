@@ -1,5 +1,3 @@
-#thanks to https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html
-
 #imports
 from __future__ import print_function, division
 
@@ -26,7 +24,7 @@ warnings.filterwarnings("ignore")
 PATH = "./nn_model/faces_ft.pt"
 
 #number of epochs for passing images through the model in training
-no_epochs = 10
+no_epochs =10
 
 #number of faces to train off of
 number_of_faces = len(os.listdir('./images/train'))

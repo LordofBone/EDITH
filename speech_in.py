@@ -4,7 +4,7 @@ import re
 from wit import Wit
 
 #the wit.ai API key (this is a fake one you will need to sign up for your own at wit.ai)
-client_wit = Wit('YOUR KEY HERE')
+client_wit = Wit('')
 
 def listen():
 	inputWords = ""

@@ -1,13 +1,10 @@
 import face_infer
 import face_trainer
 import log_new_face
-import speech_in
-import speech_out
-import bot_8 as chatbot
 import news
 import wolfram_access
-import screen
-import snaps
+import screen2
+#import snaps
 import wakeonlan
 from colors import *
 import shutdown
@@ -26,10 +23,10 @@ screenControl.clearScreen()
 
 #intro texts
 introText = ("Hi, I am EDITH, please identify yourself")
-declinedText = ("You are not an authorised user. Goodbye.")
+declinedText = ("You are not an authorized user. Goodbye.")
 
 #authorised users list
-authed = ['mike']
+authed = ['grayson, gay, gary']
 
 #get userid
 speech_out.tts(introText)
@@ -43,7 +40,7 @@ if userid in authed:
 	speech_out.tts("Hello, " + userid)
 else:
 	screenControl.clearScreen()
-	screenControl.drawText("You are not", "authorised")
+	screenControl.drawText("You are not", "authorized")
 	speech_out.tts(declinedText)
 	shutdown.shutdown()
 

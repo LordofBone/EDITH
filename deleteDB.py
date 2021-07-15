@@ -1,7 +1,6 @@
 import sys
 import random
 import pymongo
-import sys
 from pymongo import MongoClient
 
 def delDB():
@@ -9,6 +8,8 @@ def delDB():
 	db = client.words_database
 
 	client.drop_database(db)
+	
+	self._ensure_opened()
 
 if __name__ == "__main__":
 	delDB()
